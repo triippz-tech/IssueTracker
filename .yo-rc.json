@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.triippztech"
+    },
+    "jhipsterVersion": "6.0.1",
+    "applicationType": "monolith",
+    "baseName": "IssueTracker",
+    "packageName": "com.triippztech",
+    "packageFolder": "com/triippztech",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NTRiZTAwOWNiYjVkNmU0ZWI0OWQzOWYwMjRkZjliYzQ2ZDVkY2RmZjllNzc1YjI1ZWQxMDJmZTMzYjc5YTYzOTJmNDZjMzRmYTdjOGY2ZjkxMjZmZjAwYTU2MDU4ZDlhMjMzNmUwZmI1NDZmNThlNzgzMDk1ODgyM2ExZmNhZjY=",
+    "clientFramework": "react",
+    "clientTheme": "superhero",
+    "clientThemeVariant": "dark",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false
+  }
+}
