@@ -1,0 +1,59 @@
+{
+    "name": "Issue",
+    "fields": [
+        {
+            "fieldName": "number",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "priority",
+            "fieldType": "Priority",
+            "fieldValues": "SHOWSTOPPER,EMERGENCY,HIGH,LOW,ROUTINE,DEFER"
+        },
+        {
+            "fieldName": "resolution",
+            "fieldType": "Resolution",
+            "fieldValues": "NEW,RELEASED,DUPLICATE,TESTED,FIXED,PARTIALLY_FIXED,REVIEWED,CANNOT_REPRODUCE"
+        },
+        {
+            "fieldName": "reviewerId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "reportedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "issue",
+            "relationshipName": "comment"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "issue",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20190603180112",
+    "entityTableName": "issue",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

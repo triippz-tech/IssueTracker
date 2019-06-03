@@ -1,0 +1,62 @@
+
+// The priority describes how urgent the issue is
+enum Priority {
+	SHOWSTOPPER,
+    EMERGENCY,
+    HIGH,
+    LOW,
+    ROUTINE,
+    DEFER
+}
+
+// The resolution is the current status of the issue
+enum Resolution {
+	NEW,
+    RELEASED,
+    DUPLICATE,
+    TESTED,
+    FIXED,
+    PARTIALLY_FIXED,
+    REVIEWED,
+    CANNOT_REPRODUCE
+}
+
+// This is the Issue table, which will be mapped to an object
+entity Issue {
+    number Integer required,
+    description TextBlob,
+    priority Priority,
+    resolution Resolution,
+    reviewerId Long,
+    reportedDate Instant
+}
+
+// Comment for users to make
+entity Comment {
+	description TextBlob required,
+    date Instant required
+}
+
+//
+// DEFINE RELATIONSHIPS
+//
+
+// One issue may have many comments on it
+relationship OneToMany {
+	Issue{comment} to Comment
+}
+
+// One user can have multitple issues
+// One user can make many comments
+relationship ManyToOne {
+	Issue{user(login)} to User,
+    Comment{user(login)} to User
+}
+
+// Create a service class for all entities
+service * with serviceClass
+
+// Allow us to filter all the issues by their fields
+filter Issue
+
+
