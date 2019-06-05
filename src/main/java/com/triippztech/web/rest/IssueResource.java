@@ -98,6 +98,30 @@ public class IssueResource {
     }
 
     /**
+     * {@code GET  /openissues} : get all the open issues.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of open issues in body.
+     */
+    @GetMapping("/openissues")
+    public ResponseEntity<List<Issue>> getOpenIssues() {
+        log.debug("REST request to get all open Issues");
+        List<Issue> entityList = issueService.findAllOpenIssues();
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+     * {@code GET  /openissues} : get all the reviewed issues.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of reviewed issues in body.
+     */
+    @GetMapping("/reviewedissues")
+    public ResponseEntity<List<Issue>> getReviewedIssues() {
+        log.debug("REST request to get all open Issues");
+        List<Issue> entityList = issueService.findAllReviewedIssues();
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
     * {@code GET  /issues/count} : count all the issues.
     *
     * @param criteria the criteria which the requested entities should match.

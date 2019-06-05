@@ -1,6 +1,7 @@
 package com.triippztech.service;
 
 import com.triippztech.domain.Issue;
+import com.triippztech.domain.enumeration.Resolution;
 import com.triippztech.repository.IssueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,4 +71,19 @@ public class IssueService {
         log.debug("Request to delete Issue : {}", id);
         issueRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Issue> findAllOpenIssues()
+    {
+        log.debug("Request to find all open Issues");
+        return issueRepository.findAllByResolution(Resolution.NEW);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Issue> findAllReviewedIssues()
+    {
+        log.debug("Request to find all reviewed Issues");
+        return issueRepository.findAllByResolution(Resolution.REVIEWED);
+    }
+
 }
