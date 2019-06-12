@@ -110,7 +110,7 @@ public class IssueResource {
     }
 
     /**
-     * {@code GET  /openissues} : get all the reviewed issues.
+     * {@code GET  /reviewedissues} : get all the reviewed issues.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of reviewed issues in body.
      */

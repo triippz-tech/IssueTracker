@@ -7,6 +7,8 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 import { IIssue, defaultValue } from 'app/shared/model/issue.model';
 
 export const ACTION_TYPES = {
+  FETCH_OPEN_ISSUE_LIST: 'issue/FETCH_OPEN_ISSUE_LIST', // new
+  FETCH_REVIEWED_ISSUE_LIST: 'issue/FETCH_REVIEWED_ISSUE_LIST', // new
   FETCH_ISSUE_LIST: 'issue/FETCH_ISSUE_LIST',
   FETCH_ISSUE: 'issue/FETCH_ISSUE',
   CREATE_ISSUE: 'issue/CREATE_ISSUE',
@@ -20,6 +22,8 @@ const initialState = {
   loading: false,
   errorMessage: null,
   entities: [] as ReadonlyArray<IIssue>,
+  openIssues: [] as ReadonlyArray<IIssue>, // new
+  reviewedIssues: [] as ReadonlyArray<IIssue>, // new
   entity: defaultValue,
   updating: false,
   updateSuccess: false
@@ -32,6 +36,8 @@ export type IssueState = Readonly<typeof initialState>;
 export default (state: IssueState = initialState, action): IssueState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_ISSUE_LIST):
+    case REQUEST(ACTION_TYPES.FETCH_OPEN_ISSUE_LIST): // new
+    case REQUEST(ACTION_TYPES.FETCH_REVIEWED_ISSUE_LIST): // new
     case REQUEST(ACTION_TYPES.FETCH_ISSUE):
       return {
         ...state,
@@ -49,6 +55,8 @@ export default (state: IssueState = initialState, action): IssueState => {
         updating: true
       };
     case FAILURE(ACTION_TYPES.FETCH_ISSUE_LIST):
+    case FAILURE(ACTION_TYPES.FETCH_OPEN_ISSUE_LIST): // new
+    case FAILURE(ACTION_TYPES.FETCH_REVIEWED_ISSUE_LIST): // new
     case FAILURE(ACTION_TYPES.FETCH_ISSUE):
     case FAILURE(ACTION_TYPES.CREATE_ISSUE):
     case FAILURE(ACTION_TYPES.UPDATE_ISSUE):
@@ -65,6 +73,18 @@ export default (state: IssueState = initialState, action): IssueState => {
         ...state,
         loading: false,
         entities: action.payload.data
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_OPEN_ISSUE_LIST): // new
+      return {
+        ...state,
+        loading: false,
+        openIssues: action.payload.data
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_REVIEWED_ISSUE_LIST): // new
+      return {
+        ...state,
+        loading: false,
+        reviewedIssues: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.FETCH_ISSUE):
       return {
@@ -107,12 +127,24 @@ export default (state: IssueState = initialState, action): IssueState => {
 };
 
 const apiUrl = 'api/issues';
+const reviewedUrl = 'api/reviewedissues'; // new
+const openUrl = 'api/openissues'; // new
 
 // Actions
 
 export const getEntities: ICrudGetAllAction<IIssue> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_ISSUE_LIST,
   payload: axios.get<IIssue>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
+});
+
+export const getOpenIssues: ICrudGetAllAction<IIssue> = () => ({
+  type: ACTION_TYPES.FETCH_OPEN_ISSUE_LIST,
+  payload: axios.get<IIssue>(openUrl)
+});
+
+export const getReviewedIssues: ICrudGetAllAction<IIssue> = () => ({
+  type: ACTION_TYPES.FETCH_REVIEWED_ISSUE_LIST,
+  payload: axios.get<IIssue>(reviewedUrl)
 });
 
 export const getEntity: ICrudGetAction<IIssue> = id => {

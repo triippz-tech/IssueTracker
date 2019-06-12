@@ -3,6 +3,7 @@ import React from 'react';
 import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTv } from '@fortawesome/free-solid-svg-icons';
 
 import appConfig from 'app/config/constants';
 
@@ -25,6 +26,16 @@ export const Home = props => (
     <NavLink tag={Link} to="/" className="d-flex align-items-center">
       <FontAwesomeIcon icon="home" />
       <span>Home</span>
+    </NavLink>
+  </NavItem>
+);
+
+// NEW
+export const MonitorView = () => (
+  <NavItem>
+    <NavLink tag={Link} to="/monitor" className="d-flex align-items-center">
+      <FontAwesomeIcon icon={faTv} />
+      <span> Monitor Mode</span>
     </NavLink>
   </NavItem>
 );
